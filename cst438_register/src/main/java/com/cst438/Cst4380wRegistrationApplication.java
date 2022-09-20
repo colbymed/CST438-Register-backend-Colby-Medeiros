@@ -12,7 +12,7 @@ import com.cst438.service.GradebookServiceREST;
 public class Cst4380wRegistrationApplication  {  
 
 	public static void main(String[] args) {
-		SpringApplication.run(Cst4380wRegistrationApplication.class, args);
+		SpringApplication.run(Cst4380wRegistrationApplication.class, args); 
 	}
 	
 	
