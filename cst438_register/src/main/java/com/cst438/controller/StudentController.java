@@ -22,8 +22,8 @@ public class StudentController {
 	public Student addStudent(@RequestBody Student student) {
 		Student s = studentRepository.findByEmail(student.getEmail());
 		if (s == null) {
-			System.out.println("Student with email " + s.getEmail() + " does not currently exist");
-			studentRepository.save(s);
+			System.out.println("Student with email " + student.getEmail() + " does not currently exist");
+			studentRepository.save(student);
 		}
 		else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with email " + student.getEmail() + " already exists.");
@@ -66,7 +66,7 @@ public class StudentController {
 			}
 		}
 		else {
-			System.out.println("Student with email " + student.getEmail() + " does not currently exist.");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with email " + student.getEmail() + " does not exist.");
 		}
 		return s;
 	}
