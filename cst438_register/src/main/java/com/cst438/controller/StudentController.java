@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,18 +16,18 @@ public class StudentController {
 	@Autowired
 	StudentRepository studentRepository;
 	
-	@PostMapping("/student/new")
+	@PostMapping("/student")
 	@Transactional
-	public Student addStudent(@RequestBody Student student) {
+	public Student createNewStudent(@RequestBody Student student) {
 		Student s = studentRepository.findByEmail(student.getEmail());
 		if (s == null) {
 			System.out.println("Student with email " + student.getEmail() + " does not currently exist");
 			studentRepository.save(student);
+			return student;
 		}
 		else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with email " + student.getEmail() + " already exists.");
 		}
-		return s;
 	}
 	
 	@PostMapping("/student/hold/place")
@@ -40,15 +39,16 @@ public class StudentController {
 				s.setStatusCode(1);
 				s.setStatus("HOLD");
 				studentRepository.save(s);
+				System.out.println("Hold placed on student with email " + s.getEmail());
 			}
 			else {
 				System.out.println("Student with email " + s.getEmail() + " already has a hold.");
 			}
+			return s;
 		}
 		else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with email " + student.getEmail() + " does not exist.");
 		}
-		return s;
 	}
 	
 	@PostMapping("/student/hold/remove")
@@ -60,14 +60,15 @@ public class StudentController {
 				s.setStatusCode(0);
 				s.setStatus(null);
 				studentRepository.save(s);
+				System.out.println("Hold removed from student with email " + s.getEmail());
 			}
 			else {
 				System.out.println("Student with email " + s.getEmail() + " does not have a hold.");
 			}
+			return s;
 		}
 		else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with email " + student.getEmail() + " does not exist.");
 		}
-		return s;
 	}
 }
