@@ -17,7 +17,7 @@ public class StudentDTO {
 		this.status = null;
 	}
 	
-	public StudentDTO(String name, String email) {
+	public StudentDTO(String email, String name) {
 		this.student_id = 0;
 		this.name = name;
 		this.email = email;
@@ -25,7 +25,7 @@ public class StudentDTO {
 		this.status = null;
 	}
 	
-	public StudentDTO(String name, String email, int statusCode, String status) {
+	public StudentDTO(String email, String name, int statusCode, String status) {
 		this.student_id = 0;
 		this.name = name;
 		this.email = email;
