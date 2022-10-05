@@ -198,7 +198,7 @@ public class JunitTestStudent {
 		given(studentRepository.findByEmail(TEST_STUDENT_EMAIL)).willReturn(student);
 		
 		response = mvc.perform(MockMvcRequestBuilders
-				.post("/student/hold/place")
+				.put("/student/hold/place")
 				.characterEncoding("utf-8")
 				.content(asJsonString(studentDTO))
 				.contentType(MediaType.APPLICATION_JSON)
@@ -231,7 +231,7 @@ public class JunitTestStudent {
 		given(studentRepository.findByEmail(TEST_STUDENT_EMAIL)).willReturn(student);
 		
 		response = mvc.perform(MockMvcRequestBuilders
-				.post("/student/hold/remove")
+				.put("/student/hold/remove")
 				.characterEncoding("utf-8")
 				.content(asJsonString(studentDTO))
 				.contentType(MediaType.APPLICATION_JSON)
